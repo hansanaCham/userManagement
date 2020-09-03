@@ -1,0 +1,21 @@
+local 
+report tab
+
+general reports >> page card 
+						la report : 3la name|4la code|2la type|1zone 					
+									order by zone 2 type
+						Plants report : plant type| plant name| ownerzip(locala id null = nswmsc, la name) 					
+									order by zone 2 type
+						Tnsfer Station Report:
+									name|ownerzip(locala id null = nswmsc, la name)|address|contanct number
+						dump site report
+									name|ownerzip(locala id null = nswmsc, la name)|address|contanct number
+						Sampath Kemdraya
+									name|ownerzip|address|contanct
+					
+					
+					
+					
+					
+					
+servay report.

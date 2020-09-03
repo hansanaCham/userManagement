@@ -1,0 +1,24 @@
+getallplant //get all plants details
+get_plant_by_level // get plants details by local authority 
+getalltransferstation // get all transferstation details
+get_transferstation_by_level   //get transferstation details by local authority 
+get_dumpsite_by_level //get dumpsite details by local authority 
+get_all_dumpsite  //get all dumpsite details
+get_vehicle_by_authority // vehicle by LA
+
+
+http://localhost:8000/api/wasteCollect/vehicles/id  //get vehicle details by id
+
+/WasteType //get all WasteType waste type combo
+
+/get_word_by_authority // get word details by local authority
+
+
+/active_density_by_waste_type/id/	//load density by waste type 
+  
+/density_by_waste_type_and_active //load density by waste type and active status=1
+
+
+/maincollection'  //get all MainCollection  
+/maincollection/id/{id}' //get a MainCollection by id   
+/get_submitted_main_collection' //get submitted  MainCollection  
