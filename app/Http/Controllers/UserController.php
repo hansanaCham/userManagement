@@ -105,7 +105,7 @@ class UserController extends Controller
     }
     public function find($id)
     {
-        return User::find($id);
+        return User::with('userParameters')->find($id);
     }
     public function findByAttribute($attribute, $value)
     {
