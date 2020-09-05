@@ -54,8 +54,11 @@ class UserController extends Controller
             'status' => ['required', 'regex:(Active|Inactive|Archived)'],
             'civil_status' => 'required||max:50|string',
             'password' => 'required|min:8',
-            'address' => 'nullable|string'
-
+            'no' => 'nullable|string',
+            'street' => 'nullable|string',
+            'postal' => 'nullable|string',
+            'city' => 'nullable|string',
+            'country' => 'nullable|string',
         ]);
         return  \DB::transaction(function () use ($request) {
             $user = new User();
@@ -77,7 +80,11 @@ class UserController extends Controller
             $user->status = $request->status;
             $user->civil_status = $request->civil_status;
             $user->password = Hash::make($request->password);
-            $user->address = $request->address;
+            $user->no = $request->no;
+            $user->street = $request->street;
+            $user->postal = $request->postal;
+            $user->city = $request->city;
+            $user->country = $request->country;
             $user->api_token = Str::random(80);
             $msg =  $user->save();
             $userParams = $request->userParams;
@@ -148,8 +155,11 @@ class UserController extends Controller
             'status' => ['sometimes', 'required', 'regex:(Active|Inactive|Archived)'],
             'civil_status' => 'sometimes|required||max:50|string',
             'password' => 'sometimes|required|min:8',
-            'address' => 'nullable|string'
-
+            'no' => 'nullable|string',
+            'street' => 'nullable|string',
+            'postal' => 'nullable|string',
+            'city' => 'nullable|string',
+            'country' => 'nullable|string',
         ]);
         return  \DB::transaction(function () use ($request, $id) {
             $user =  User::findOrFail($id);
