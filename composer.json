@@ -15,7 +15,8 @@
         "laravel/passport": "^9.2",
         "laravel/tinker": "^1.0",
         "maatwebsite/excel": "^3",
-        "php-parallel-lint/php-console-color": "^0.3.0"
+        "php-parallel-lint/php-console-color": "^0.3.0",
+        "spatie/laravel-cors": "^1.6"
     },
     "require-dev": {
         "facade/ignition": "^1.4",
