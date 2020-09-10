@@ -36,6 +36,7 @@ class ChangeFilesToUsersTable extends Migration
             $table->dropColumn('postal');
             $table->dropColumn('city');
             $table->dropColumn('country');
+            $table->text('address')->nullable();
         });
     }
 }
