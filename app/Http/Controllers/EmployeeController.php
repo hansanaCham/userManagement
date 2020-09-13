@@ -38,31 +38,31 @@ class EmployeeController extends Controller
         // $table->string('salary_categoty', 70);
 
         request()->validate([
-            'user_id' => 'required|integrer',
+            'user_id' => 'required|integer',
             'basic_salary' => 'required|numeric',
             'ot_category' => 'required|max:70|string',
             'fixed_allowance' => 'nullable|numeric',
-            'extra_allowance' => ['nullable', 'regex:(Active|0|1)'],
-            'attendance_type' => ['nullable', 'regex:(Active|0|1)'],
+            'extra_allowance' => ['nullable', 'max:1'],
+            'attendance_type' => ['nullable', 'max:1'],
             'salary_categoty' => 'required|max:70|string',
 
         ]);
         return  \DB::transaction(function () use ($request) {
             $empyloyee = new Employee();
-            $empyloyee->user_id = $request->user_name;
-            $empyloyee->basic_salary = $request->initials;
-            $empyloyee->ot_category = $request->first_name;
-            $empyloyee->fixed_allowance = $request->last_name;
-            $empyloyee->extra_allowance = $request->surname;
-            $empyloyee->attendance_type = $request->nic;
-            $empyloyee->salary_categoty = $request->date_of_birth;
+            $empyloyee->user_id = $request->user_id;
+            $empyloyee->basic_salary = $request->basic_salary;
+            $empyloyee->ot_category = $request->ot_category;
+            $empyloyee->fixed_allowance = $request->fixed_allowance;
+            $empyloyee->extra_allowance = $request->extra_allowance;
+            $empyloyee->attendance_type = $request->attendance_type;
+            $empyloyee->salary_categoty = $request->salary_categoty;
             $msg =  $empyloyee->save();
             $emparams = $request->empyloyee_params;
             if (isset($emparams) && is_array($emparams)) {
                 // dd($userParams);
                 foreach ($emparams as $key => $value) {
                     $emparam = new EmployeeParameter();
-                    $emparam->user_id = $empyloyee->id;
+                    $emparam->employee_id = $empyloyee->id;
                     $emparam->name = $key;
                     $emparam->value = $value;
                     $msg = $msg && $emparam->save();
@@ -86,7 +86,7 @@ class EmployeeController extends Controller
     public function store(Request $request, $id)
     {
         request()->validate([
-            'user_id' => 'sometimes|required|integrer',
+            'user_id' => 'sometimes|required|integer',
             'basic_salary' => 'sometimes|required|numeric',
             'ot_category' => 'sometimes|required|max:70|string',
             'fixed_allowance' => 'nullable|numeric',
@@ -104,10 +104,10 @@ class EmployeeController extends Controller
             $emparams = $request->empyloyee_params;
             if (isset($emparams) && is_array($emparams)) {
                 // dd($userParams);
-                EmployeeParameter::where('user_id', $id)->delete();
+                EmployeeParameter::where('employee_id', $id)->delete();
                 foreach ($emparams as $key => $value) {
                     $emparam = new EmployeeParameter();
-                    $emparam->user_id = $id;
+                    $emparam->employee_id = $id;
                     $emparam->name = $key;
                     $emparam->value = $value;
                     $msg = $msg && $emparam->save();
@@ -124,7 +124,7 @@ class EmployeeController extends Controller
 
     public function show()
     {
-        return Employee::with('employeeParameters')->with('user')->orderBy('initials')->get();
+        return Employee::with('employeeParameters')->with('user')->orderBy('user_id')->get();
     }
     public function find($id)
     {
@@ -132,7 +132,7 @@ class EmployeeController extends Controller
     }
     public function findByAttribute($attribute, $value)
     {
-        return Employee::with('employeeParameters')->with('user')->where($attribute, $value)->orderBy('initials')->get();
+        return Employee::with('employeeParameters')->with('user')->where($attribute, $value)->orderBy('user_id')->get();
     }
 
     /**
@@ -174,7 +174,7 @@ class EmployeeController extends Controller
      */
     public function delete($id)
     {
-        $employee = EmployeeParameter::findOrFail($id);
+        $employee = Employee::findOrFail($id);
         $msg =  $employee->delete();
         LogActivity::addToLog('Employee Deleted', $employee);
         if ($msg) {

@@ -100,7 +100,7 @@ class UserController extends Controller
             }
             LogActivity::addToLog('User Create', $user);
             if ($msg) {
-                return response(array("id" => 1, "message" => "ok"));
+                return response(array("id" => 1, "message" => "ok", "user_id" => $user->id));
             } else {
                 return response(array("id" => 0, "message" => "fail"));
             }
