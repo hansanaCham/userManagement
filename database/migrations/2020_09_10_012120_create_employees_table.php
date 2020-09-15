@@ -16,15 +16,18 @@ class CreateEmployeesTable extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
-            $table->double('basic_salary', 11, 2)->unsigned();
-            $table->string('ot_category', 70);
-            $table->double('fixed_allowance', 11, 2)->nullable();
-            $table->boolean('extra_allowance')->default(0)->comment('0 => false , 1=> true');
-            $table->boolean('attendance_type')->default(0)->comment('0 => fixed , 1=> true');
-            $table->string('salary_categoty', 70);
+            $table->string('designation', 255);
+            $table->string('department', 255)->nullable();
+            $table->date('join_date')->nullable();
+            $table->string('employee_type', 255)->nullable();
+            $table->string('tire', 255)->nullable();
+            $table->string('company_email', 255)->nullable();
+            $table->string('employee_status', 255)->nullable();
+            $table->string('supervisor', 255)->nullable();
+            $table->string('manager', 255)->nullable();
+            $table->string('leave_group', 255)->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
         });
     }
 
