@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 
-Route::post('/employee', 'EmployeeController@create');  // create a new user
+Route::post('/salary', 'SalaryController@create');  // create a new user
 /*
  * Request Format
  * 
@@ -31,7 +31,7 @@ Route::post('/employee', 'EmployeeController@create');  // create a new user
     "message": "ok"
 }
 */
-Route::get('/employee/all', 'EmployeeController@show');  // get all users
+Route::get('/salary/all', 'SalaryController@show');  // get all users
 /*
 * responces
 [
@@ -164,7 +164,7 @@ Route::get('/employee/all', 'EmployeeController@show');  // get all users
 ]
 */
 
-Route::get('/employee/{attribute}/{value}', 'EmployeeController@findByAttribute');  // get users by attribute and value
+Route::get('/salary/{attribute}/{value}', 'SalaryController@findByAttribute');  // get users by attribute and value
 
 /*
 * responces
@@ -298,7 +298,7 @@ Route::get('/employee/{attribute}/{value}', 'EmployeeController@findByAttribute'
     },
 */
 
-Route::get('/employee/{id}', 'EmployeeController@find');  // get users by id
+Route::get('/salary/{id}', 'SalaryController@find');  // get users by id
 
 /*  responce
  {
@@ -363,7 +363,7 @@ Route::get('/employee/{id}', 'EmployeeController@find');  // get users by id
 
 */
 
-Route::put('/employee/{id}', 'EmployeeController@store');  // update user by id
+Route::put('/salary/{id}', 'SalaryController@store');  // update user by id
 /* Request Format
  * {
     "user_name": "hansana",
@@ -397,7 +397,7 @@ Route::put('/employee/{id}', 'EmployeeController@store');  // update user by id
     "message": "ok"
 }
 */
-Route::delete('/employee/{id}', 'EmployeeController@delete');  // get users by id
+Route::delete('/salary/{id}', 'SalaryController@delete');  // get users by id
 /*
 *responce code
 {
