@@ -63,7 +63,7 @@ class SalaryController extends Controller
                 // dd($userParams);
                 foreach ($emparams as $key => $value) {
                     $slry = new Salary();
-                    $slry->employee_id = $slry->id;
+                    $slry->salary_id = $slry->id;
                     $slry->name = $key;
                     $slry->value = $value;
                     $msg = $msg && $slry->save();
@@ -108,7 +108,7 @@ class SalaryController extends Controller
                 SalaryParameter::where('employee_id', $id)->delete();
                 foreach ($emparams as $key => $value) {
                     $slparams = new SalaryParameter();
-                    $slparams->employee_id = $id;
+                    $slparams->salary_id = $id;
                     $slparams->name = $key;
                     $slparams->value = $value;
                     $msg = $msg && $slparams->save();

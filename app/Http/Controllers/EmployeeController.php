@@ -30,45 +30,57 @@ class EmployeeController extends Controller
     public function create(Request $request)
     {
         // $table->bigInteger('user_id')->unsigned();
-        // $table->double('basic_salary', 11, 2)->unsigned();
-        // $table->string('ot_category', 70);
-        // $table->double('fixed_allowance', 11, 2)->nullable();
-        // $table->boolean('extra_allowance')->default(0)->comment('0 => false , 1=> true');
-        // $table->boolean('attendance_type')->default(0)->comment('0 => fixed , 1=> true');
-        // $table->string('salary_categoty', 70);
+        // $table->string('designation', 255);
+        // $table->string('department', 255)->nullable();
+        // $table->date('join_date')->nullable();
+        // $table->string('employee_type', 255)->nullable();
+        // $table->string('tire', 255)->nullable();
+        // $table->string('company_email', 255)->nullable();
+        // $table->string('employee_status', 255)->nullable();
+        // $table->string('supervisor', 255)->nullable();
+        // $table->string('manager', 255)->nullable();
+        // $table->string('leave_group', 255)->nullable();
 
         request()->validate([
             'user_id' => 'required|integer',
-            'basic_salary' => 'required|numeric',
-            'ot_category' => 'required|max:70|string',
-            'fixed_allowance' => 'nullable|numeric',
-            'extra_allowance' => ['nullable', 'max:1'],
-            'attendance_type' => ['nullable', 'max:1'],
-            'salary_categoty' => 'required|max:70|string',
+            'designation' => 'required|string|max:255',
+            'department' => 'nullable|max:255|string',
+            'join_date' => 'nullable|date',
+            'employee_type' => 'nullable|max:255|string',
+            'tire' => 'nullable|max:255|string',
+            'company_email' => 'nullable|max:255|string',
+            'employee_status' => 'nullable|max:255|string',
+            'supervisor' => 'nullable|max:255|string',
+            'manager' => 'nullable|max:255|string',
+            'leave_group' => 'nullable|max:255|string',
 
         ]);
         return  \DB::transaction(function () use ($request) {
-            $empyloyee = new Employee();
-            $empyloyee->user_id = $request->user_id;
-            $empyloyee->basic_salary = $request->basic_salary;
-            $empyloyee->ot_category = $request->ot_category;
-            $empyloyee->fixed_allowance = $request->fixed_allowance;
-            $empyloyee->extra_allowance = $request->extra_allowance;
-            $empyloyee->attendance_type = $request->attendance_type;
-            $empyloyee->salary_categoty = $request->salary_categoty;
-            $msg =  $empyloyee->save();
-            $emparams = $request->empyloyee_params;
+            $employee = new Employee();
+            $employee->user_id = $request->user_id;
+            $employee->designation = $request->designation;
+            $employee->department = $request->department;
+            $employee->join_date = $request->join_date;
+            $employee->employee_type = $request->employee_type;
+            $employee->tire = $request->tire;
+            $employee->company_email = $request->company_email;
+            $employee->employee_status = $request->employee_status;
+            $employee->supervisor = $request->supervisor;
+            $employee->manager = $request->manager;
+            $employee->leave_group = $request->leave_group;
+            $msg =  $employee->save();
+            $emparams = $request->employee_params;
             if (isset($emparams) && is_array($emparams)) {
                 // dd($userParams);
                 foreach ($emparams as $key => $value) {
-                    $emparam = new EmployeeParameter();
-                    $emparam->employee_id = $empyloyee->id;
-                    $emparam->name = $key;
-                    $emparam->value = $value;
-                    $msg = $msg && $emparam->save();
+                    $e = new EmployeeParameter();
+                    $e->employee_id = $employee->id;
+                    $e->name = $key;
+                    $e->value = $value;
+                    $msg = $msg && $e->save();
                 }
             }
-            LogActivity::addToLog('Create Empyloyee Profile', $empyloyee);
+            LogActivity::addToLog('Create Employee Profile', $employee);
             if ($msg) {
                 return response(array("id" => 1, "message" => "ok"));
             } else {
@@ -87,21 +99,25 @@ class EmployeeController extends Controller
     {
         request()->validate([
             'user_id' => 'sometimes|required|integer',
-            'basic_salary' => 'sometimes|required|numeric',
-            'ot_category' => 'sometimes|required|max:70|string',
-            'fixed_allowance' => 'nullable|numeric',
-            'extra_allowance' => ['nullable', 'regex:(Active|0|1)'],
-            'attendance_type' => ['nullable', 'regex:(Active|0|1)'],
-            'salary_categoty' => 'sometimes|required|max:70|string',
+            'designation' => 'sometimes|required|string|max:255',
+            'department' => 'nullable|max:255|string',
+            'join_date' => 'nullable|date',
+            'employee_type' => 'nullable|max:255|string',
+            'tire' => 'nullable|max:255|string',
+            'company_email' => 'nullable|max:255|string',
+            'employee_status' => 'nullable|max:255|string',
+            'supervisor' => 'nullable|max:255|string',
+            'manager' => 'nullable|max:255|string',
+            'leave_group' => 'nullable|max:255|string',
 
         ]);
         return  \DB::transaction(function () use ($request, $id) {
-            $empyloyee =  Employee::findOrFail($id);
+            $employee =  Employee::findOrFail($id);
             $req = request()->all();
-            unset($req['empyloyee_params']);
+            unset($req['employee_params']);
 
             $msg = Employee::where('id', $id)->update($req);
-            $emparams = $request->empyloyee_params;
+            $emparams = $request->employee_params;
             if (isset($emparams) && is_array($emparams)) {
                 // dd($userParams);
                 EmployeeParameter::where('employee_id', $id)->delete();
@@ -113,7 +129,7 @@ class EmployeeController extends Controller
                     $msg = $msg && $emparam->save();
                 }
             }
-            LogActivity::addToLog('Update Empyloyee Profile', $empyloyee);
+            LogActivity::addToLog('Update Employee Profile', $employee);
             if ($msg) {
                 return response(array("id" => 1, "message" => "ok"));
             } else {
