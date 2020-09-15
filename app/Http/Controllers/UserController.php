@@ -108,15 +108,15 @@ class UserController extends Controller
     }
     public function show()
     {
-        return User::with('userParameters')->orderBy('initials')->get();
+        return User::with('userParameters')->with('employee.employeeParameters')->orderBy('initials')->get();
     }
     public function find($id)
     {
-        return User::with('userParameters')->find($id);
+        return User::with('userParameters')->with('employee.employeeParameters')->find($id);
     }
     public function findByAttribute($attribute, $value)
     {
-        return User::with('userParameters')->where($attribute, $value)->orderBy('initials')->get();
+        return User::with('userParameters')->with('employee.employeeParameters')->where($attribute, $value)->orderBy('initials')->get();
     }
     public function edit(Request $request, $id)
     {

@@ -58,6 +58,11 @@ class User extends Authenticatable
         return $this->hasMany(UserParameter::class);
     }
 
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
+
 
 
 
