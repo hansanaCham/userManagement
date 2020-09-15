@@ -8,16 +8,22 @@ Route::post('/employee', 'EmployeeController@create');  // create a new user
  * 
  {
     "user_id": "1",
-    "basic_salary": "5000",
-    "ot_category": "cat1",
-    "fixed_allowance": "6000",
-    "extra_allowance": "0",
-    "attendance_type": "0",
-    "salary_categoty": "dasd",
-    "empyloyee_params": {
-        "blood": "O+",
-        "fsdf": "dasd"
-    }    
+    "designation": "manager",
+    "department": "human resource",
+    "oin_date": "2020-01-01",
+    "employee_type": "contract",
+    "tire": "tire 1",
+    "company_email": "Hansanacham@gmail.com",
+    "employee_status": "active",
+    "supervisor": "sundaram",
+    "manager": "kamla",
+    "leave_group": "abc",
+    "employee_params" : {
+       "working_experence":"5",
+       "first_employer":"kamal",
+       "last_employer":"suresh",
+       "rate":"5000" 
+    }
 }
 *responce code
 {
