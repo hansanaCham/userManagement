@@ -81,5 +81,13 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('api')
             ->namespace($this->namespace)
             ->group(base_path('routes/employeeAPI.php'));
+        Route::prefix('api/1.0.0')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/leaveConfigAPI.php'));
+        Route::prefix('api/1.0.0')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/leaveGroupAPI.php'));
     }
 }
