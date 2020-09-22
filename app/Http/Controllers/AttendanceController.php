@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Attendance;
 use Illuminate\Http\Request;
+use App\Repositories\AttendanceRepository;
 
 class AttendanceController extends Controller
 {
+
+    private $attendanceRepository;
+    public function __construct(AttendanceRepository $attendanceRepository)
+    {
+        $this->attendanceRepository = $attendanceRepository;
+        $this->middleware(['auth:api']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +32,6 @@ class AttendanceController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -35,7 +42,12 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // request()->validate([
+        //     'file' =>  'required|mimes:xls,xlsx',
+        // ]);
+
+        $this->attendanceRepository->save($request);
+        // dd("das");
     }
 
     /**
