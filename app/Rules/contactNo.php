@@ -35,6 +35,6 @@ class contactNo implements Rule
      */
     public function message()
     {
-        return 'Contact number is not valid.';
+        return ':attribute is not valid.';
     }
 }

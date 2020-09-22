@@ -20,13 +20,21 @@ class LeaveGroupRepository
 {
     public function save($request)
     {
-        return LeaveGroup::create($request->all());
+        // dd()
+        return   \DB::transaction(function () use ($request) {
+            $leaveGroup  = LeaveGroup::create($request->all());
+            return $leaveGroup->leaveConfigs()->sync($request->leave_types);
+        });
     }
 
     public function update($leaveGroup, $request)
     {
         // return LeaveConfig::create($request->all());
-        return $leaveGroup->update($request->all());
+        return   \DB::transaction(function () use ($leaveGroup, $request) {
+            $leaveGrp = $leaveGroup->update($request->all());
+            // dd($leaveGroup);
+            return $leaveGroup->leaveConfigs()->sync($request->leave_types);
+        });
     }
     public function all()
     {
@@ -35,5 +43,9 @@ class LeaveGroupRepository
     public function delete($leaveGroup)
     {
         return $leaveGroup->delete();
+    }
+    public function getByAttribute($attribute, $value)
+    {
+        return LeaveGroup::where($attribute, $value)->get();
     }
 }

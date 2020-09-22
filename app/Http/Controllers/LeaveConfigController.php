@@ -114,4 +114,9 @@ class LeaveConfigController extends Controller
             return response(array("id" => 0, "message" => "fail"));
         }
     }
+
+    public function getByAttribute($attribute, $value)
+    {
+        return  $this->leaveConfigRepository->getByAttribute($attribute, $value);
+    }
 }

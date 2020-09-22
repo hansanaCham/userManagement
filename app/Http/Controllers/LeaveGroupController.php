@@ -108,4 +108,9 @@ class LeaveGroupController extends Controller
             return response(array("id" => 0, "message" => "fail"));
         }
     }
+
+    public function getByAttribute($attribute, $value)
+    {
+        return  $this->leaveGroupRepository->getByAttribute($attribute, $value);
+    }
 }

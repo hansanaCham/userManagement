@@ -37,4 +37,8 @@ class LeaveConfigRepository
     {
         return $leaveConfig->delete();
     }
+    public function getByAttribute($attribute, $value)
+    {
+        return LeaveConfig::where($attribute, $value)->get();
+    }
 }
