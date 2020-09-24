@@ -3,8 +3,8 @@
 namespace App\Repositories;
 
 use App\Attendance;
-use App\Imports\AttendecesImport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\AttendanceImportRepositories;
 
 
 /*
@@ -23,24 +23,29 @@ class AttendanceRepository
     public function save($request)
     {
 
-        Excel::import(new AttendecesImport, $request->file('file'));
+        Excel::import(new AttendanceImportRepositories, $request->file('file'));
+        return true;
     }
 
-    public function update($leaveConfig, $request)
+    public function update($request, $id)
     {
-        // return LeaveConfig::create($request->all());
-        // return $leaveConfig->update($request->all());
+        return Attendance::findOrFail($id)->update($request->all()) == true;
     }
     public function all()
     {
-        // return LeaveConfig::all();
+        return Attendance::all();
     }
-    public function delete($leaveConfig)
+
+    public function find($id)
     {
-        // return $leaveConfig->delete();
+        return Attendance::findOrFail($id);
+    }
+    public function delete($id)
+    {
+        return Attendance::findOrFail($id)->delete() == true;
     }
     public function getByAttribute($attribute, $value)
     {
-        // return LeaveConfig::where($attribute, $value)->get();
+        return Attendance::where($attribute, $value)->get();
     }
 }

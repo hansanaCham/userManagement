@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 
-// Route::get('/leave_groups/{attribute}/{value}', 'LeaveGroupController@getByAttribute');
+Route::get('/attendance/{attribute}/{value}', 'AttendanceController@getByAttribute');
 Route::apiResource('/attendance', 'AttendanceController');  // create a new user
 /**
  * data set
