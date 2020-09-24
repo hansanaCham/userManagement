@@ -22,7 +22,7 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        //
+        return $this->attendanceRepository->all();
     }
 
     /**
@@ -42,12 +42,14 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        // request()->validate([
-        //     'file' =>  'required|mimes:xls,xlsx',
-        // ]);
-
-        $this->attendanceRepository->save($request);
-        // dd("das");
+        request()->validate([
+            'file' => '|required|file|mimes:xlsx,csv,tsv,ods,xls,slk,xml,gnumeric,html',
+        ]);
+        if ($this->attendanceRepository->save($request)) {
+            return response(array("id" => 1, "message" => "ok"));
+        } else {
+            return response(array("id" => 0, "message" => "fail"));
+        }
     }
 
     /**
@@ -56,9 +58,9 @@ class AttendanceController extends Controller
      * @param  \App\Attendance  $attendance
      * @return \Illuminate\Http\Response
      */
-    public function show(Attendance $attendance)
+    public function show($id)
     {
-        //
+        return   $this->attendanceRepository->find($id);
     }
 
     /**
@@ -79,9 +81,28 @@ class AttendanceController extends Controller
      * @param  \App\Attendance  $attendance
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Attendance $attendance)
+    public function update(Request $request, $id)
     {
-        //
+        request()->validate([
+            'ac_no' => 'sometimes|required|integer',
+            'name' => 'sometimes|required|string',
+            'date' => 'sometimes|required|date',
+            'timetable' => 'sometimes|required|string',
+            'on_duty' => 'sometimes|required|date_format:H:i',
+            'off_duty' => 'sometimes|required|date_format:H:i',
+            'clock_in' => 'nullable|date_format:H:i',
+            'clock_out' => 'nullable|date_format:H:i',
+            'late' => 'nullable|date_format:H:i',
+            'early' => 'nullable|date_format:H:i',
+            'absent' => 'sometimes|required|integer|between:0,1',
+            'ot_time' => 'nullable|date_format:H:i',
+            'work_time' => 'nullable|date_format:H:i',
+        ]);
+        if ($this->attendanceRepository->update($request, $id)) {
+            return response(array("id" => 1, "message" => "ok"));
+        } else {
+            return response(array("id" => 1, "message" => "fail"));
+        }
     }
 
     /**
@@ -90,8 +111,17 @@ class AttendanceController extends Controller
      * @param  \App\Attendance  $attendance
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Attendance $attendance)
+    public function destroy($id)
     {
-        //
+        if ($this->attendanceRepository->delete($id)) {
+            return response(array("id" => 1, "message" => "ok"));
+        } else {
+            return response(array("id" => 1, "message" => "fail"));
+        }
+    }
+
+    public function getByAttribute($attribute, $value)
+    {
+        return  $this->attendanceRepository->getByAttribute($attribute, $value);
     }
 }

@@ -29,6 +29,7 @@ class CreateAttendancesTable extends Migration
             $table->time('ot_time')->nullable();
             $table->time('work_time')->nullable();
             $table->timestamps();
+            $table->unique(['employee_no', 'date']);
         });
     }
 
