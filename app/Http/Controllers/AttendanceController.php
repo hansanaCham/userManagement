@@ -42,7 +42,9 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-
+        request()->validate([
+            'file' => '|required|file|mimes:xlsx,csv,tsv,ods,xls,slk,xml,gnumeric,html',
+        ]);
         if ($this->attendanceRepository->save($request)) {
             return response(array("id" => 1, "message" => "ok"));
         } else {
