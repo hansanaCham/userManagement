@@ -53,6 +53,7 @@ class EmployeeController extends Controller
             'supervisor' => 'nullable|max:255|string',
             'manager' => 'nullable|max:255|string',
             'leave_group' => 'nullable|max:255|string',
+            'employee_no' => 'required|string',
 
         ]);
         return  \DB::transaction(function () use ($request) {
@@ -68,6 +69,7 @@ class EmployeeController extends Controller
             $employee->supervisor = $request->supervisor;
             $employee->manager = $request->manager;
             $employee->leave_group = $request->leave_group;
+            $employee->employee_no = $request->employee_no;
             $msg =  $employee->save();
             $emparams = $request->employee_params;
             if (isset($emparams) && is_array($emparams)) {
@@ -109,6 +111,7 @@ class EmployeeController extends Controller
             'supervisor' => 'nullable|max:255|string',
             'manager' => 'nullable|max:255|string',
             'leave_group' => 'nullable|max:255|string',
+            'employee_no' => 'nullable|string',
 
         ]);
         return  \DB::transaction(function () use ($request, $id) {

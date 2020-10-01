@@ -14,7 +14,7 @@ class AddEmployeeNoToEmployeesTable extends Migration
     public function up()
     {
         Schema::table('employees', function (Blueprint $table) {
-            $table->string('employee_no');
+            $table->string('employee_no', 255);
         });
     }
 
