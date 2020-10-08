@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 
+
+Route::get('/user/auth', "UserController@authUser");
 Route::post('/user', 'UserController@create');  // create a new user
 /*
  * Request Format

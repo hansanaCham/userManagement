@@ -267,6 +267,11 @@ class UserController extends Controller
             return response(array("id" => 0, "message" => "fail"));
         }
     }
+    public function authUser()
+    {
+        // return "h1";
+        return    Auth::user();
+    }
 
     public function logout()
     {
