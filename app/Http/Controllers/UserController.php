@@ -269,8 +269,7 @@ class UserController extends Controller
     }
     public function authUser()
     {
-        // return "h1";
-        return    Auth::user();
+        return User::with('employee.employeeParameters')->findOrFail(Auth::user()->id);
     }
 
     public function logout()
