@@ -124,4 +124,8 @@ class AttendanceController extends Controller
     {
         return  $this->attendanceRepository->getByAttribute($attribute, $value);
     }
+    public function getAttendanceFromT0($emp_id, $from, $to)
+    {
+        return  $this->attendanceRepository->getAttendanceFromT0($emp_id, $from, $to);
+    }
 }

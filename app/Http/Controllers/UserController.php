@@ -59,6 +59,7 @@ class UserController extends Controller
             'postal' => 'nullable|string',
             'city' => 'nullable|string',
             'country' => 'nullable|string',
+            'is_admin' => 'required|integer',
         ]);
         return  \DB::transaction(function () use ($request) {
             $user = new User();
@@ -85,6 +86,7 @@ class UserController extends Controller
             $user->postal = $request->postal;
             $user->city = $request->city;
             $user->country = $request->country;
+            $user->is_admin = $request->is_admin;
             $user->api_token = Str::random(80);
             $msg =  $user->save();
             $userParams = $request->userParams;
@@ -160,6 +162,7 @@ class UserController extends Controller
             'postal' => 'nullable|string',
             'city' => 'nullable|string',
             'country' => 'nullable|string',
+            'is_admin' => 'required|integer',
         ]);
         return  \DB::transaction(function () use ($request, $id) {
             $user =  User::findOrFail($id);

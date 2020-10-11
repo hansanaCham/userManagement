@@ -48,4 +48,8 @@ class AttendanceRepository
     {
         return Attendance::where($attribute, $value)->get();
     }
+    public function getAttendanceFromT0($empId, $from, $to)
+    {
+        return Attendance::where('employee_no', $empId)->whereBetween('date', [$from, $to])->get();
+    }
 }

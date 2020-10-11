@@ -50,8 +50,8 @@ class EmployeeController extends Controller
             'tire' => 'nullable|max:255|string',
             'company_email' => 'nullable|max:255|string',
             'employee_status' => 'nullable|max:255|string',
-            'supervisor' => 'nullable|max:255|string',
-            'manager' => 'nullable|max:255|string',
+            'supervisor_id' => 'nullable|integer',
+            'manager_id' => 'nullable|integer',
             'leave_group' => 'nullable|max:255|string',
             'employee_no' => 'required|string',
 
@@ -108,8 +108,8 @@ class EmployeeController extends Controller
             'tire' => 'nullable|max:255|string',
             'company_email' => 'nullable|max:255|string',
             'employee_status' => 'nullable|max:255|string',
-            'supervisor' => 'nullable|max:255|string',
-            'manager' => 'nullable|max:255|string',
+            'supervisor_id' => 'nullable|integer',
+            'manager_id' => 'nullable|integer',
             'leave_group' => 'nullable|max:255|string',
             'employee_no' => 'nullable|string',
 
