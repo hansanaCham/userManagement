@@ -29,7 +29,7 @@ class AttendanceRepository
 
     public function update($request, $id)
     {
-        return Attendance::findOrFail($id)->update($request->all()) == true;
+        return Attendance::findOrFail($id)->update($request) == true;
     }
     public function all()
     {

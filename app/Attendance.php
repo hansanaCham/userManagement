@@ -20,5 +20,7 @@ class Attendance extends Model
         'absent',
         'ot_time',
         'work_time',
+        'comment',
+        'user_id'
     ];
 }

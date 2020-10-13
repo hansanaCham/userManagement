@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Attendance;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Repositories\AttendanceRepository;
 
 class AttendanceController extends Controller
@@ -97,7 +98,10 @@ class AttendanceController extends Controller
             'absent' => 'sometimes|required|integer|between:0,1',
             'ot_time' => 'nullable|date_format:H:i',
             'work_time' => 'nullable|date_format:H:i',
+            'comment'   => 'sometimes|required|string',
         ]);
+        $data = $request->all();
+        $data['user_id'] = Auth::user()->id;
         if ($this->attendanceRepository->update($request, $id)) {
             return response(array("id" => 1, "message" => "ok"));
         } else {
