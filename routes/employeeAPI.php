@@ -407,4 +407,7 @@ Route::delete('/employee/{id}', 'EmployeeController@delete');  // get users by i
 */
 
 // whCfeQlbJhpuxJI5gKTu2Wj54uqEMa8k3xEOCwcm
-//2
+//2'
+
+
+Route::get('/employee/reporting/{department}/{tire}', 'EmployeeController@getReportingManager');  // get reporting manager
