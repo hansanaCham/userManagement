@@ -2,10 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Attendance;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\AttendanceImportRepositories;
-
+use App\Department;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,38 +15,35 @@ use App\Imports\AttendanceImportRepositories;
  *
  * @author hansana
  */
-class AttendanceRepository
+class DepartmentRepository
 {
     public function save($request)
     {
-
-        Excel::import(new AttendanceImportRepositories, $request->file('file'));
-        return true;
     }
 
     public function update($request, $id)
     {
-        return Attendance::findOrFail($id)->update($request) == true;
+        // return Attendance::findOrFail($id)->update($request) == true;
     }
     public function all()
     {
-        return Attendance::with('user')->get();
+        return Department::all();
     }
 
     public function find($id)
     {
-        return Attendance::findOrFail($id);
+        // return Attendance::findOrFail($id);
     }
     public function delete($id)
     {
-        return Attendance::findOrFail($id)->delete() == true;
+        // return Attendance::findOrFail($id)->delete() == true;
     }
     public function getByAttribute($attribute, $value)
     {
-        return Attendance::with('user')->where($attribute, $value)->get();
+        // return Attendance::where($attribute, $value)->get();
     }
     public function getAttendanceFromT0($empId, $from, $to)
     {
-        return Attendance::with('user')->where('employee_no', $empId)->whereBetween('date', [$from, $to])->get();
+        // return Attendance::where('employee_no', $empId)->whereBetween('date', [$from, $to])->get();
     }
 }

@@ -102,7 +102,7 @@ class AttendanceController extends Controller
         ]);
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
-        if ($this->attendanceRepository->update($request, $id)) {
+        if ($this->attendanceRepository->update($data, $id)) {
             return response(array("id" => 1, "message" => "ok"));
         } else {
             return response(array("id" => 1, "message" => "fail"));

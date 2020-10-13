@@ -12,3 +12,17 @@ Route::apiResource('/attendance', 'AttendanceController');  // create a new user
     "no_of_days": "5"
     }
  */
+
+
+Route::apiResource('/department', 'DepartmentController');  // department
+/**
+ * data set
+ * {
+        "id": 2,
+        "name": "Dep 2",
+        "created_at": null,
+        "updated_at": null,
+        "deleted_at": null
+    },
+ */
+Route::apiResource('/tire', 'TireController');  // tire
