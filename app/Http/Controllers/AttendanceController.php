@@ -95,7 +95,7 @@ class AttendanceController extends Controller
             'clock_out' => 'nullable|date_format:H:i',
             'late' => 'nullable|date_format:H:i',
             'early' => 'nullable|date_format:H:i',
-            'absent' => 'sometimes|required|integer|between:0,1',
+            'absent' => 'sometimes|required|integer',
             'ot_time' => 'nullable|date_format:H:i',
             'work_time' => 'nullable|date_format:H:i',
             'comment'   => 'sometimes|required|string',
