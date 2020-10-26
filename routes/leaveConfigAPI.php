@@ -13,6 +13,7 @@ Route::apiResource('/leave_configs', 'LeaveConfigController');  // create a new 
 }
  */
 
+Route::get('/leave_apply/{attribute}/{value}', 'LeaveApplyController@getByAttribute'); // get data by attribute name and attribute value 
 Route::apiResource('/leave_apply', 'LeaveApplyController');  // create a leave apply get put post
 /**
  * Data set
