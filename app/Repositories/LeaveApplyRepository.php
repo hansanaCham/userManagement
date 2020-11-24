@@ -41,4 +41,11 @@ class LeaveApplyRepository
     {
         return LeaveApply::where($attribute, $value)->get();
     }
+
+    public function getByDate($date)
+    {
+        return LeaveApply::where('from_date', '>=', $date)
+            ->where('to_date', '<=', $date)
+            ->get();
+    }
 }
